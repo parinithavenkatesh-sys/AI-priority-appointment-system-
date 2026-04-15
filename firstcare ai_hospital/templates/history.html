@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>FirstCare Doctor Dashboard</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='doctor.css') }}">
+
+<style>
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#2c3e50;
+color:white;
+padding:15px;
+}
+
+.stats{
+display:flex;
+gap:20px;
+margin:20px;
+justify-content:center;
+}
+
+.card{
+background:white;
+padding:15px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+width:200px;
+text-align:center;
+}
+
+.search-box{
+text-align:center;
+margin:20px;
+}
+
+.search-box input{
+padding:8px;
+width:300px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+.status{
+padding:5px 10px;
+border-radius:5px;
+color:white;
+font-size:12px;
+}
+
+.done{
+background:green;
+}
+
+.pending{
+background:red;
+}
+
+.complete-btn{
+background:#27ae60;
+color:white;
+border:none;
+padding:5px 10px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+
+<h1>FirstCare Doctor Dashboard</h1>
+
+<div id="clock"></div>
+
+</div>
+
+<!-- STATISTICS -->
+
+<div class="stats">
+
+<div class="card">
+<h3>Total Patients</h3>
+<p>{{ patients|length }}</p>
+</div>
+
+<div class="card">
+<h3>Emergency</h3>
+<p>
+{{ patients|selectattr("priority","equalto","High")|list|length }}
+</p>
+</div>
+
+<div class="card">
+<h3>Waiting</h3>
+<p>
+{{ patients|selectattr("prescription","equalto","")|list|length }}
+</p>
+</div>
+
+</div>
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+<input type="text" id="searchInput" placeholder="Search patient name..." onkeyup="searchPatient()">
+
+</div>
+
+<!-- EMERGENCY -->
+
+<h2 style="color:red;text-align:center;">🚨 Emergency Patients</h2>
+
+<table>
+
+<tr>
+<th>Name</th>
+<th>Age</th>
+<th>Symptoms</th>
+<th>Doctor</th>
+<th>Status</th>
+<th>Prescription</th>
+<th>Action</th>
+</tr>
+
+{% for patient in patients %}
+{% if patient.priority == "High" %}
+
+<tr>
+
+<td>{{ patient.name }}</td>
+<td>{{ patient.age }}</td>
+<td>{{ patient.symptoms }}</td>
+<td>{{ patient.doctor }}</td>
+
+<td>
+
+{% if patient.prescription %}
+<span class="status done">Completed</span>
+{% else %}
+<span class="status pending">Waiting</span>
+{% endif %}
+
+</td>
+
+<td>{{ patient.prescription if patient.prescription else "Not Given" }}</td>
+
+<td>
+
+<form action="/add_prescription/{{ loop.index0 }}" method="POST">
+
+<input type="text" name="prescription" placeholder="Write prescription">
+
+<button type="submit">Save</button>
+
+</form>
+
+</td>
+
+</tr>
+
+{% endif %}
+{% endfor %}
+
+</table>
+
+<!-- MEDIUM -->
+
+<h2 style="color:orange;text-align:center;">⚠ Medium Priority Patients</h2>
+
+<table>
+
+<tr>
+<th>Name</th>
+<th>Age</th>
+<th>Symptoms</th>
+<th>Doctor</th>
+<th>Status</th>
+<th>Prescription</th>
+<th>Action</th>
+</tr>
+
+{% for patient in patients %}
+{% if patient.priority == "Medium" %}
+
+<tr>
+
+<td>{{ patient.name }}</td>
+<td>{{ patient.age }}</td>
+<td>{{ patient.symptoms }}</td>
+<td>{{ patient.doctor }}</td>
+
+<td>
+
+{% if patient.prescription %}
+<span class="status done">Completed</span>
+{% else %}
+<span class="status pending">Waiting</span>
+{% endif %}
+
+</td>
+
+<td>{{ patient.prescription if patient.prescription else "Not Given" }}</td>
+
+<td>
+
+<form action="/add_prescription/{{ loop.index0 }}" method="POST">
+
+<input type="text" name="prescription" placeholder="Write prescription">
+
+<button type="submit">Save</button>
+
+</form>
+
+</td>
+
+</tr>
+
+{% endif %}
+{% endfor %}
+
+</table>
+
+<!-- NORMAL -->
+
+<h2 style="color:green;text-align:center;">🟢 Normal Patients</h2>
+
+<table>
+
+<tr>
+<th>Name</th>
+<th>Age</th>
+<th>Symptoms</th>
+<th>Doctor</th>
+<th>Status</th>
+<th>Prescription</th>
+<th>Action</th>
+</tr>
+
+{% for patient in patients %}
+{% if patient.priority == "Low" %}
+
+<tr>
+
+<td>{{ patient.name }}</td>
+<td>{{ patient.age }}</td>
+<td>{{ patient.symptoms }}</td>
+<td>{{ patient.doctor }}</td>
+
+<td>
+
+{% if patient.prescription %}
+<span class="status done">Completed</span>
+{% else %}
+<span class="status pending">Waiting</span>
+{% endif %}
+
+</td>
+
+<td>{{ patient.prescription if patient.prescription else "Not Given" }}</td>
+
+<td>
+
+<form action="/add_prescription/{{ loop.index0 }}" method="POST">
+
+<input type="text" name="prescription" placeholder="Write prescription">
+
+<button type="submit">Save</button>
+
+</form>
+
+</td>
+
+</tr>
+
+{% endif %}
+{% endfor %}
+
+</table>
+
+<script>
+
+function updateClock(){
+const now=new Date();
+document.getElementById("clock").innerText=now.toLocaleString();
+}
+
+setInterval(updateClock,1000)
+
+function searchPatient(){
+
+let input=document.getElementById("searchInput").value.toLowerCase()
+let rows=document.querySelectorAll("table tr")
+
+rows.forEach(row=>{
+
+let name=row.cells[0]
+
+if(name){
+
+if(name.innerText.toLowerCase().includes(input))
+row.style.display=""
+
+else
+row.style.display="none"
+
+}
+
+})
+
+}
+
+// Auto refresh dashboard every 10 sec
+setTimeout(()=>location.reload(),10000)
+
+</script>
+
+</body>
+</html>

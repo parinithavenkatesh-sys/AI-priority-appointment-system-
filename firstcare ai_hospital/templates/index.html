@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>First Care Hospital</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="landing">
+
+    <div class="logo-container">
+
+        <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+
+        <h1>First Care Hospital</h1>
+
+        <p>Your Health, Our Priority</p>
+
+        <a href="/booking">
+            <button class="book-btn">Book Appointment</button>
+        </a>
+
+    </div>
+
+</body>
+
+</html>

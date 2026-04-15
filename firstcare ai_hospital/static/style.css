@@ -1,0 +1,231 @@
+/* ===== Global Body ===== */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f9b8e, #3c8ce7);
+    min-height: 100vh;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+/* ===== Landing Page ===== */
+body.landing {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.logo-container {
+    animation: floatIn 2s ease forwards;
+}
+
+.logo {
+    width: 180px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+}
+
+.book-btn {
+    margin-top: 25px;
+    padding: 14px 40px;
+    font-size: 18px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #ff9800, #ff5722);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.book-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: linear-gradient(135deg, #e68900, #d84315);
+}
+
+/* ===== Dashboard ===== */
+.dashboard {
+    width: 450px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: fadeIn 0.8s ease-in-out forwards;
+    color: #fff;
+}
+
+.logo-small {
+    width: 90px;
+    display: block;
+    margin: 0 auto 15px auto;
+}
+
+.dashboard h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 1px 1px 8px rgba(0,0,0,0.4);
+}
+
+/* ===== Input Fields ===== */
+label {
+    font-weight: 600;
+    margin-top: 12px;
+    display: block;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border-radius: 12px;
+    border: none;
+    background: rgba(255,255,255,0.25);
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input::placeholder, textarea::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+input:focus, textarea:focus {
+    background: rgba(255,255,255,0.4);
+    box-shadow: 0 0 8px rgba(255,255,255,0.4);
+}
+
+/* ===== Buttons ===== */
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #0f9b8e, #3c8ce7);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+button:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: linear-gradient(135deg, #0c7b70, #2a69d1);
+}
+
+/* ===== Patient Details / Result ===== */
+.container {
+    width: 600px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    padding: 25px;
+    margin: 40px auto;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    color: #fff;
+}
+
+.symptoms-box {
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 12px;
+    max-height: 180px;
+    overflow-y: auto;
+    margin-top: 10px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.1);
+}
+
+/* ===== Priority Highlight ===== */
+.priority-box {
+    margin-top: 20px;
+    padding: 15px 30px;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 30px;
+    font-size: 20px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+    animation: pulse 1.5s infinite;
+    color: #fff;
+}
+
+/* High Priority */
+.priority-box.high {
+    background: linear-gradient(135deg, #ff4d4d, #ff0000);
+    text-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+}
+
+/* Medium Priority */
+.priority-box.medium {
+    background: linear-gradient(135deg, #ffa500, #ff8c00);
+    text-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+}
+
+/* Low Priority */
+.priority-box.low {
+    background: linear-gradient(135deg, #4caf50, #2e7d32);
+    text-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+}
+
+/* ===== Confirmation & Thank You ===== */
+.confirmation {
+    display: none;
+    margin-top: 25px;
+    padding: 22px;
+    border: 2px solid #00c4cc;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    text-align: center;
+    font-weight: 600;
+}
+
+.thankyou {
+    color: #00ff7f;
+    font-weight: bold;
+    margin-top: 15px;
+    text-shadow: 1px 1px 10px rgba(0,0,0,0.4);
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes floatIn {
+    0% { transform: translateY(-30px); opacity: 0; }
+    50% { transform: translateY(10px); opacity: 0.6; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 8px 25px rgba(0,0,0,0.35); }
+    50% { transform: scale(1.05); box-shadow: 0 12px 30px rgba(0,0,0,0.45); }
+    100% { transform: scale(1); box-shadow: 0 8px 25px rgba(0,0,0,0.35); }
+}
+.symptoms-box label {
+    display: block;
+    margin-bottom: 6px;
+    cursor: pointer;
+}
