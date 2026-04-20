@@ -162,11 +162,14 @@ def booking():
 
 @app.route("/doctor-login", methods=["GET", "POST"])
 def doctor_login():
+    error = None
     if request.method == "POST":
-        if request.form["username"] == "doctor" and request.form["password"] == "1234":
+        username = request.form.get("username", "").strip().lower()
+        password = request.form.get("password", "").strip()
+        if username == "doctor" and password == "1234":
             return redirect(url_for("doctor_dashboard"))
-        return "Invalid Login ❌"
-    return render_template("doctor_login.html")
+        error = "Invalid username or password ❌"
+    return render_template("doctor_login.html", error=error)
 
 
 @app.route("/doctor")

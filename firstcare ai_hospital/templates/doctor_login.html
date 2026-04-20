@@ -9,7 +9,11 @@
 <div class="container">
     <h2>👨‍⚕️ Doctor Login</h2>
 
-    <form method="POST" action="/doctor-login">
+    <form method="POST" action="{{ url_for('doctor_login') }}">
+
+        {% if error %}
+            <div class="error-message">{{ error }}</div>
+        {% endif %}
 
         <label>Username</label>
         <input type="text" name="username" required>
