@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: firstcare-ai-hospital
-    env: python
-    branch: main
-    root: firstcare ai_hospital
-    buildCommand: pip install -r requirements.txt
-    startCommand: python app.py
-    plan: free
